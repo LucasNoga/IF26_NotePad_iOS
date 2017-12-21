@@ -10,42 +10,74 @@ import UIKit
 
 class MainViewController: UITableViewController {
 
+    var editNoteController: EditNoteController?
+    var mNotes : [Note] = []
+    
+    @IBOutlet weak var stepForward: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        creationTableau()
+        print("Salut")
+        
+        
+        //self.clearsSelectionOnViewWillAppear = false
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
+        self.tableView.delegate = self
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(MainViewController.ajoutNote(_:)))
+        
+        self.navigationItem.rightBarButtonItem = addButton
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    func creationTableau(){
+        mNotes = [Note.init(titre: "salut", contenu: "monContenu"), Note.init(titre: "salut2", contenu: "monContenu"), Note.init(titre: "salut3", contenu: "monContenu"), Note.init(titre: "salut4", contenu: "monContenu")]
+    }
+    
+    @objc func ajoutNote(_ sender: AnyObject) {
+        mNotes.append(Note())
     }
 
-    // MARK: - Table view data source
-
+    // MARK: - Segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("ok1")/////////////////////////////////////////////////////////////////////////////////
+        if segue.identifier == "editerNote" { //permet d'afficher la note
+            print("ok2") //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                print("ok3")//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //let note = self.mNotes[indexPath.row] //on recupere la note
+                //let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController //on lance la scene d'edition
+                //controller.note = note
+                //print("\(note.titre)  \(note.contenu)" )//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
+                //controller.navigationItem.leftItemsSupplementBackButton = true
+            }
+        }
+    }
+    
+    //Gestion de la tableView
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
-
+    
+    //Compteur d'element de la liste
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return mNotes.count
     }
 
-    /*
+    //Mis en forme de la liste
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let note = mNotes[indexPath.row]
+        cell.textLabel?.text = note.titre
+        cell.detailTextLabel?.text = note.contenu
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
