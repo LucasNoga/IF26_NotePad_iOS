@@ -90,7 +90,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Titre de la note" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HQT-Wl-5so" userLabel="Note Title">
-                                <rect key="frame" x="20" y="92" width="339" height="30"/>
+                                <rect key="frame" x="20" y="92" width="671" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -123,7 +123,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZgM-jJ-nrp" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="164" y="150"/>
+            <point key="canvasLocation" x="164" y="149.77511244377811"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="d9w-eq-RAs">

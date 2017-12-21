@@ -23,7 +23,7 @@ class MainViewController: UITableViewController {
         self.tableView.delegate = self
         
         let addNote = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ajoutNote))
-        self.navigationItem.setRightBarButton(addButton, animated: true)
+        self.navigationItem.setRightBarButton(addNote, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,11 +67,11 @@ class MainViewController: UITableViewController {
     func editerNote(segue: UIStoryboardSegue, indexPath: IndexPath){
         print("ok3")////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         let note = self.mNotes[indexPath.row] //on recupere la note
-        //let controller = segue.destination as! EditNoteController //on lance la scene d'edition
-        //controller.note = note
-        print("\(note.titre)  \(note.contenu)" )///////////////////////////////////////////////////////////////////
-        //controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
-        //controller.navigationItem.leftItemsSupplementBackButton = true
+       
+        let nav = segue.destination as! UINavigationController
+        let controller = nav.topViewController as! EditNoteController
+        controller.note = note
+        print(controller.note.titre)
     }
     
     //Creation de la nouvelle note

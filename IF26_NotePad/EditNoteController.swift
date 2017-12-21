@@ -16,7 +16,17 @@ class EditNoteController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(sauvegardeNote))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel ,  target: self, action: #selector(cancelNote))
         print("EditController")
-        //self.updateView()
+        self.updateNote()
+    
+        
+        let tapToEnd = UITapGestureRecognizer(target: self, action: #selector(EditNoteController.tapToEndFunction))
+        tapToEnd.numberOfTapsRequired = 2
+        noteTitle.addGestureRecognizer(tapToEnd)
+        
+        
+        let tapToEdit = UITapGestureRecognizer(target: self, action: #selector(EditNoteController.tapFunction))
+        tapToEdit.numberOfTapsRequired = 1
+        noteText.addGestureRecognizer(tapToEdit)
         
     }
     
@@ -44,7 +54,7 @@ class EditNoteController: UIViewController {
     }
     
     /** Affiche le titre et le contenu de la sélectionné */
-    func updateView() {
+    func updateNote() {
         self.noteTitle.insertText(note.titre)
         self.noteText.insertText(note.contenu)
     }
