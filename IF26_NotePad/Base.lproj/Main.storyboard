@@ -73,7 +73,7 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G0V-gJ-mP4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationItem title="Title" id="46y-Ty-8ph"/>
+                <navigationItem title="BlocNotes" id="OZS-Wb-YIA"/>
             </objects>
             <point key="canvasLocation" x="2311.1999999999998" y="-630.13493253373315"/>
         </scene>
@@ -89,7 +89,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title of this note" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HQT-Wl-5so" userLabel="Note Title">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Titre de la note" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HQT-Wl-5so" userLabel="Note Title">
                                 <rect key="frame" x="20" y="92" width="339" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
@@ -118,11 +118,12 @@
                     <connections>
                         <outlet property="noteText" destination="Vyl-r2-mks" id="BTM-tC-Xap"/>
                         <outlet property="noteTitle" destination="HQT-Wl-5so" id="LbG-JZ-YXw"/>
+                        <segue destination="TKT-Dc-4wh" kind="show" identifier="RetourNote" id="uja-8A-nkS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZgM-jJ-nrp" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1632.8" y="158.77061469265368"/>
+            <point key="canvasLocation" x="2311" y="170"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="d9w-eq-RAs">
@@ -143,4 +144,8 @@
             <point key="canvasLocation" x="164" y="-630"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="dda-La-Ndl"/>
+        <segue reference="uja-8A-nkS"/>
+    </inferredMetricsTieBreakers>
 </document>

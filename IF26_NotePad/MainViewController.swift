@@ -26,9 +26,10 @@ class MainViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.tableView.delegate = self
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(MainViewController.ajoutNote(_:)))
-        
-        self.navigationItem.rightBarButtonItem = addButton
+        //let addNote = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(MainViewController.ajoutNote(_:)))
+        let addNote = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ajoutNote))
+        self.navigationItem.rightBarButtonItem = addNote
+        //self.navigationItem.setRightBarButton(addButton, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,22 +41,31 @@ class MainViewController: UITableViewController {
     }
     
     @objc func ajoutNote(_ sender: AnyObject) {
+        performSegue(withIdentifier: "editerNote", sender: self)
         mNotes.append(Note())
     }
 
     // MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("ok1")/////////////////////////////////////////////////////////////////////////////////
+
         if segue.identifier == "editerNote" { //permet d'afficher la note
-            print("ok2") //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //si on a selectionner une note deja existante
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                print("ok3")//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                //let note = self.mNotes[indexPath.row] //on recupere la note
-                //let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController //on lance la scene d'edition
+                print("ok3")////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                let note = self.mNotes[indexPath.row] //on recupere la note
+                //let controller = segue.destination as! EditNoteController //on lance la scene d'edition
                 //controller.note = note
-                //print("\(note.titre)  \(note.contenu)" )//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                print("\(note.titre)  \(note.contenu)" )///////////////////////////////////////////////////////////////////
                 //controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 //controller.navigationItem.leftItemsSupplementBackButton = true
+            }
+            //sinon on creer une nouvelle note
+            else{
+                print("ok4")
+                let note = mNotes[mNotes.count-1]//on prend la note qu'on vien de creer
+                let controller = (segue.destination as! UINavigationController) as! EditNoteController //on lance la scene d'edition
+                controller.note = note
+                print("nouvelle note")
             }
         }
     }

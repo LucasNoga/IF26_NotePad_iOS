@@ -13,15 +13,33 @@ class EditNoteController: UIViewController {
     @IBOutlet weak var noteText: UITextView!
     @IBOutlet weak var noteTitle: UITextField!
     
+    var cancel: Bool = false
+    var save: Bool =  false
+    
     var note: Note!
     
     /*Methode lors de la creation de la scene*/
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(sauvegardeNote))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel ,  target: self, action: #selector(cancelNote))
+        print("EditController")
+        //self.updateView()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButton))
-        self.updateView()
-        
+    }
+    
+    // MARK: - Segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("ok1")/////////////////////////////////////////////////////////////////////////////////
+        if segue.identifier == "retourNote" { //permet de revenir au main
+            if save{
+                print("save note")
+                //Envoyer la note
+            }
+            else if cancel{
+                print("cancel note")
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,18 +49,6 @@ class EditNoteController: UIViewController {
     /*Lorsqu'on quitte la scene*/
     override func viewDidDisappear(_ animated: Bool) {
         self.sauvegardeNote()
-    }
-    
-    func sauvegardeNote() {
-        //let appDelegate = UIApplication.shared.delegate as! AppDelegate////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        note.setContenu(contenu: noteText.text!)//sauvegarde le contenu de la note
-        
-        note.setTitre(titre: noteTitle.text!)//sauvegarde dans la note le titre
-        
-        do {
-            //appDelegate.saveContext()////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        }
     }
     
     /** Affiche le titre et le contenu de la sélectionné */
@@ -61,17 +67,17 @@ class EditNoteController: UIViewController {
         noteText.isEditable = false
     }
     
-    //////////////////////??A VOIR A QUOI ELLE SERT////////////////////////////////////////////////////////////////////////////////////////////
-    @objc func shareButton() {
-        var itemsToShare = [String]()
-        let note = self.note
-        let noteTitle = note?.titre
-        let noteBody = note?.contenu
-        itemsToShare.append(noteTitle!)
-        itemsToShare.append(noteBody!)
+    @objc func cancelNote(){
+        cancel = true
+        performSegue(withIdentifier: "retourNote", sender: self)
         
-        let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    @objc func sauvegardeNote() {
+        save = true
+        note.setContenu(contenu: noteText.text!)//sauvegarde le contenu de la note
+        note.setTitre(titre: noteTitle.text!)//sauvegarde dans la note le titre
+        performSegue(withIdentifier: "retourNote", sender: self)
     }
 }
 
