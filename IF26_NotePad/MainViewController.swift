@@ -1,57 +1,36 @@
-//
-//  MainViewController.swift
-//  IF26_NotePad
-//
-//  Created by lucas noga on 21/12/2017.
-//  Copyright © 2017 lucas noga. All rights reserved.
-//
-
 import UIKit
 
 class MainViewController: UITableViewController {
-    var mNotes : [Note] = []
-   
+    
+    var mNotes: [Note] = []
+    var editNoteController: EditNoteController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        creationTableau()
-        print("Salut")
+        //creationTableau()
         
+        setNavigationButton()
+        print("taille du tableau \(mNotes.count)")
+        //Si on a modifié des notes
+        //print("didLoad")
         
-        //self.clearsSelectionOnViewWillAppear = false
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.tableView.delegate = self
-        
+        tableView.reloadData()
+    }
+    
+    // Creation des boutons et des actions dans la barre du menu
+    func setNavigationButton(){
+        self.navigationItem.leftBarButtonItem = self.editButtonItem //bouton edition et suppression pour une tableView
         let addNote = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ajoutNote))
         self.navigationItem.setRightBarButton(addNote, animated: true)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     func creationTableau(){
         mNotes = [Note.init(titre: "salut", contenu: "monContenu"), Note.init(titre: "salut2", contenu: "monContenu"),
                   Note.init(titre: "salut3", contenu: "monContenu"), Note.init(titre: "salut4", contenu: "monContenu")]
     }
     
-    @objc func ajoutNote(_ sender: AnyObject) {
-        print(mNotes.count)
-        //print(mNotes[3])
-        mNotes.append(Note())
-        performSegue(withIdentifier: "editerNote", sender: self)
-        print(mNotes.count)
-    }
-
-    //Segue
+    //Segue et traite les notes existantes des nouvelles notes
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //nous redirige vers la scene d'edition
         if segue.identifier == "editerNote" {
@@ -59,30 +38,30 @@ class MainViewController: UITableViewController {
                 //si on a selectionner une note deja existante
                 editerNote(segue: segue, indexPath: indexPath)
             }
-            else{
-                //sinon on creer une nouvelle note
-                creerNote(segue: segue)
-            }
         }
+    }
+    
+    // Action lorsque l'on clique sur +
+    @objc func ajoutNote(_ sender: AnyObject) {
+        mNotes.append(Note(titre: "nouvelle note" , contenu:"nouveau contenu"))
+        tableView.reloadData()
     }
     
     //Pour editer une note existante
     func editerNote(segue: UIStoryboardSegue, indexPath: IndexPath){
-        print("ok3")////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        let note = self.mNotes[indexPath.row] //on recupere la note
-       
+        //let note = self.mNotes[indexPath.row] //on recupere la note
         let nav = segue.destination as! UINavigationController
-        let controller = nav.topViewController as! EditNoteController
-        controller.note = note
-        print(controller.note.titre)
+        editNoteController = nav.topViewController as! EditNoteController
+        editNoteController.note = self.mNotes[indexPath.row]
+        editNoteController.posNote = indexPath.row
+        editNoteController.mainController = self
+        print(editNoteController.note.titre)
     }
     
-    //Creation de la nouvelle note
-    func creerNote(segue: UIStoryboardSegue){
-        let note = mNotes[mNotes.count-1]//on prend la note qu'on vien de creer
-        let nav = segue.destination as! UINavigationController
-        let controller = nav.topViewController as! EditNoteController
-        controller.note = note
+    //Fonction qui permet de supprimer une note
+    func supprimerNote(index: Int){
+        mNotes.remove(at: index)
+        tableView.reloadData()
     }
     
     //Gestion de la tableView
@@ -103,50 +82,36 @@ class MainViewController: UITableViewController {
         cell.detailTextLabel?.text = note.contenu
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        //Supprime la note selectionner voulue
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            supprimerNote(index: indexPath.row)
+        
+        // Ajoute une nouvelle note
         } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+            print("insertion d'une note")
         }    
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    //Permet de recharger la vue
+    override func viewDidAppear(_ animated: Bool) {
+        //print("viewDidAppear")
+        tableView.reloadData()
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    //Permet de recharger la vue
+    override func viewWillAppear(_ animated: Bool) {
+        //print("viewWillAppear")
     }
-    */
-
+    
 }
