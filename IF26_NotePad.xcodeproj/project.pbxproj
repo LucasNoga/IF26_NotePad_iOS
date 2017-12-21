@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0908A8311FEBAD720053C4ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0908A8301FEBAD720053C4ED /* AppDelegate.swift */; };
-		0908A8331FEBAD720053C4ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0908A8321FEBAD720053C4ED /* ViewController.swift */; };
 		0908A8361FEBAD720053C4ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0908A8341FEBAD720053C4ED /* Main.storyboard */; };
 		0908A8381FEBAD720053C4ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0908A8371FEBAD720053C4ED /* Assets.xcassets */; };
 		0908A83B1FEBAD720053C4ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0908A8391FEBAD720053C4ED /* LaunchScreen.storyboard */; };
 		0908A8461FEBAD720053C4ED /* IF26_NotePadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0908A8451FEBAD720053C4ED /* IF26_NotePadTests.swift */; };
 		0908A8511FEBAD720053C4ED /* IF26_NotePadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0908A8501FEBAD720053C4ED /* IF26_NotePadUITests.swift */; };
+		0908A85F1FEBAE9D0053C4ED /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0908A85E1FEBAE9D0053C4ED /* MainViewController.swift */; };
+		0908A8611FEBAFFC0053C4ED /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0908A8601FEBAFFC0053C4ED /* Note.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,6 @@
 /* Begin PBXFileReference section */
 		0908A82D1FEBAD720053C4ED /* IF26_NotePad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IF26_NotePad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0908A8301FEBAD720053C4ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0908A8321FEBAD720053C4ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0908A8351FEBAD720053C4ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0908A8371FEBAD720053C4ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0908A83A1FEBAD720053C4ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +47,8 @@
 		0908A84C1FEBAD720053C4ED /* IF26_NotePadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IF26_NotePadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0908A8501FEBAD720053C4ED /* IF26_NotePadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IF26_NotePadUITests.swift; sourceTree = "<group>"; };
 		0908A8521FEBAD720053C4ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0908A85E1FEBAE9D0053C4ED /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		0908A8601FEBAFFC0053C4ED /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +100,12 @@
 			isa = PBXGroup;
 			children = (
 				0908A8301FEBAD720053C4ED /* AppDelegate.swift */,
-				0908A8321FEBAD720053C4ED /* ViewController.swift */,
 				0908A8341FEBAD720053C4ED /* Main.storyboard */,
 				0908A8371FEBAD720053C4ED /* Assets.xcassets */,
 				0908A8391FEBAD720053C4ED /* LaunchScreen.storyboard */,
 				0908A83C1FEBAD720053C4ED /* Info.plist */,
+				0908A85E1FEBAE9D0053C4ED /* MainViewController.swift */,
+				0908A8601FEBAFFC0053C4ED /* Note.swift */,
 			);
 			path = IF26_NotePad;
 			sourceTree = "<group>";
@@ -259,8 +262,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0908A8331FEBAD720053C4ED /* ViewController.swift in Sources */,
+				0908A85F1FEBAE9D0053C4ED /* MainViewController.swift in Sources */,
 				0908A8311FEBAD720053C4ED /* AppDelegate.swift in Sources */,
+				0908A8611FEBAFFC0053C4ED /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
