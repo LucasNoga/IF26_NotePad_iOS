@@ -44,8 +44,11 @@ class MainViewController: UITableViewController {
     }
     
     @objc func ajoutNote(_ sender: AnyObject) {
-        performSegue(withIdentifier: "editerNote", sender: self)
+        print(mNotes.count)
+        //print(mNotes[3])
         mNotes.append(Note())
+        performSegue(withIdentifier: "editerNote", sender: self)
+        print(mNotes.count)
     }
 
     //Segue
@@ -77,7 +80,6 @@ class MainViewController: UITableViewController {
     //Creation de la nouvelle note
     func creerNote(segue: UIStoryboardSegue){
         let note = mNotes[mNotes.count-1]//on prend la note qu'on vien de creer
-        //let controller = (segue.destination as! EditNoteController //on lance la scene d'edition
         let nav = segue.destination as! UINavigationController
         let controller = nav.topViewController as! EditNoteController
         controller.note = note

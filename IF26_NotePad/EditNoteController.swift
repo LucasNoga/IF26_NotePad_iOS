@@ -1,9 +1,9 @@
 import UIKit
 
-class EditNoteController: UIViewController {
+class EditNoteController: UIViewController{
 
-    @IBOutlet weak var noteText: UITextView!
-    @IBOutlet weak var noteTitle: UITextField!
+    @IBOutlet var tfTitre: UITextField!
+    @IBOutlet var tfContenu: UITextField!
     
     var cancel: Bool = false
     var save: Bool =  false
@@ -13,22 +13,21 @@ class EditNoteController: UIViewController {
     /*Methode lors de la creation de la scene*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(sauvegardeNote))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(sauvegardeNote))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel ,  target: self, action: #selector(cancelNote))
         print("EditController")
+        
+        tfTitre.resignFirstResponder()
+        tfContenu.resignFirstResponder()
+
         self.updateNote()
-    
-        
-        let tapToEnd = UITapGestureRecognizer(target: self, action: #selector(EditNoteController.tapToEndFunction))
-        tapToEnd.numberOfTapsRequired = 2
-        noteTitle.addGestureRecognizer(tapToEnd)
-        
-        
-        let tapToEdit = UITapGestureRecognizer(target: self, action: #selector(EditNoteController.tapFunction))
-        tapToEdit.numberOfTapsRequired = 1
-        noteText.addGestureRecognizer(tapToEdit)
-        
     }
+    
+    //Pouvoir tapez dans les champs de texts
+    //func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+      //  tfTitre.resignFirstResponder()
+        //return true;
+    //}
     
     // MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,30 +54,30 @@ class EditNoteController: UIViewController {
     
     /** Affiche le titre et le contenu de la sélectionné */
     func updateNote() {
-        self.noteTitle.insertText(note.titre)
-        self.noteText.insertText(note.contenu)
+        self.tfTitre.insertText(note.titre)
+        self.tfContenu.insertText(note.contenu)
     }
     
     /** Methode pour focus sur la vue d'edition de la note */
     @objc func tapFunction(sender: UITapGestureRecognizer) {
-        noteText.isEditable = true
+        
     }
     
     /** Methode pour unfocus sur la vue d'edition de la note */
     @objc func tapToEndFunction(sender: UITapGestureRecognizer) {
-        noteText.isEditable = false
+        print("tapEndFunction")
+        
     }
     
     @objc func cancelNote(){
         cancel = true
         performSegue(withIdentifier: "retourNote", sender: self)
-        
     }
     
     @objc func sauvegardeNote() {
         save = true
-        note.setContenu(contenu: noteText.text!)//sauvegarde le contenu de la note
-        note.setTitre(titre: noteTitle.text!)//sauvegarde dans la note le titre
+        note.setContenu(contenu: self.tfContenu.text!)//sauvegarde le contenu de la note
+        note.setTitre(titre: self.tfTitre.text!)//sauvegarde dans la note le titre
         performSegue(withIdentifier: "retourNote", sender: self)
     }
 }
