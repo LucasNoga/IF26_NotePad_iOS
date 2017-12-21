@@ -1,11 +1,3 @@
-//
-//  EditNoteController.swift
-//  IF26_NotePad
-//
-//  Created by lucas noga on 21/12/2017.
-//  Copyright © 2017 lucas noga. All rights reserved.
-//
-
 import UIKit
 
 class EditNoteController: UIViewController {
@@ -48,7 +40,7 @@ class EditNoteController: UIViewController {
     
     /*Lorsqu'on quitte la scene*/
     override func viewDidDisappear(_ animated: Bool) {
-        self.sauvegardeNote()
+        super.viewDidDisappear(animated)
     }
     
     /** Affiche le titre et le contenu de la sélectionné */

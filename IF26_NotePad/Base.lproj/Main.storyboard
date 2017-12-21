@@ -118,12 +118,12 @@
                     <connections>
                         <outlet property="noteText" destination="Vyl-r2-mks" id="BTM-tC-Xap"/>
                         <outlet property="noteTitle" destination="HQT-Wl-5so" id="LbG-JZ-YXw"/>
-                        <segue destination="TKT-Dc-4wh" kind="show" identifier="RetourNote" id="uja-8A-nkS"/>
+                        <segue destination="TKT-Dc-4wh" kind="show" identifier="retourNote" id="uja-8A-nkS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZgM-jJ-nrp" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2311" y="170"/>
+            <point key="canvasLocation" x="164" y="150"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="d9w-eq-RAs">
@@ -145,7 +145,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="dda-La-Ndl"/>
         <segue reference="uja-8A-nkS"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,14 +9,10 @@
 import UIKit
 
 class MainViewController: UITableViewController {
-
-    var editNoteController: EditNoteController?
     var mNotes : [Note] = []
-    
-    @IBOutlet weak var stepForward: UIButton!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-
 
         creationTableau()
         print("Salut")
@@ -26,18 +22,25 @@ class MainViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.tableView.delegate = self
         
-        //let addNote = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(MainViewController.ajoutNote(_:)))
         let addNote = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ajoutNote))
-        self.navigationItem.rightBarButtonItem = addNote
-        //self.navigationItem.setRightBarButton(addButton, animated: true)
+        self.navigationItem.setRightBarButton(addButton, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     func creationTableau(){
-        mNotes = [Note.init(titre: "salut", contenu: "monContenu"), Note.init(titre: "salut2", contenu: "monContenu"), Note.init(titre: "salut3", contenu: "monContenu"), Note.init(titre: "salut4", contenu: "monContenu")]
+        mNotes = [Note.init(titre: "salut", contenu: "monContenu"), Note.init(titre: "salut2", contenu: "monContenu"),
+                  Note.init(titre: "salut3", contenu: "monContenu"), Note.init(titre: "salut4", contenu: "monContenu")]
     }
     
     @objc func ajoutNote(_ sender: AnyObject) {
@@ -45,29 +48,39 @@ class MainViewController: UITableViewController {
         mNotes.append(Note())
     }
 
-    // MARK: - Segues
+    //Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.identifier == "editerNote" { //permet d'afficher la note
-            //si on a selectionner une note deja existante
+        //nous redirige vers la scene d'edition
+        if segue.identifier == "editerNote" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                print("ok3")////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                let note = self.mNotes[indexPath.row] //on recupere la note
-                //let controller = segue.destination as! EditNoteController //on lance la scene d'edition
-                //controller.note = note
-                print("\(note.titre)  \(note.contenu)" )///////////////////////////////////////////////////////////////////
-                //controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
-                //controller.navigationItem.leftItemsSupplementBackButton = true
+                //si on a selectionner une note deja existante
+                editerNote(segue: segue, indexPath: indexPath)
             }
-            //sinon on creer une nouvelle note
             else{
-                print("ok4")
-                let note = mNotes[mNotes.count-1]//on prend la note qu'on vien de creer
-                let controller = (segue.destination as! UINavigationController) as! EditNoteController //on lance la scene d'edition
-                controller.note = note
-                print("nouvelle note")
+                //sinon on creer une nouvelle note
+                creerNote(segue: segue)
             }
         }
+    }
+    
+    //Pour editer une note existante
+    func editerNote(segue: UIStoryboardSegue, indexPath: IndexPath){
+        print("ok3")////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        let note = self.mNotes[indexPath.row] //on recupere la note
+        //let controller = segue.destination as! EditNoteController //on lance la scene d'edition
+        //controller.note = note
+        print("\(note.titre)  \(note.contenu)" )///////////////////////////////////////////////////////////////////
+        //controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
+        //controller.navigationItem.leftItemsSupplementBackButton = true
+    }
+    
+    //Creation de la nouvelle note
+    func creerNote(segue: UIStoryboardSegue){
+        let note = mNotes[mNotes.count-1]//on prend la note qu'on vien de creer
+        //let controller = (segue.destination as! EditNoteController //on lance la scene d'edition
+        let nav = segue.destination as! UINavigationController
+        let controller = nav.topViewController as! EditNoteController
+        controller.note = note
     }
     
     //Gestion de la tableView
