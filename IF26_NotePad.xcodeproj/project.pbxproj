@@ -16,6 +16,7 @@
 		0908A85F1FEBAE9D0053C4ED /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0908A85E1FEBAE9D0053C4ED /* MainViewController.swift */; };
 		0908A8611FEBAFFC0053C4ED /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0908A8601FEBAFFC0053C4ED /* Note.swift */; };
 		0908A8631FEBB1CA0053C4ED /* EditNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0908A8621FEBB1CA0053C4ED /* EditNoteController.swift */; };
+		0951874E1FF7C3E600C29563 /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0951874D1FF7C3E600C29563 /* SQLiteDB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		0908A85E1FEBAE9D0053C4ED /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0908A8601FEBAFFC0053C4ED /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		0908A8621FEBB1CA0053C4ED /* EditNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteController.swift; sourceTree = "<group>"; };
+		0951874D1FF7C3E600C29563 /* SQLiteDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteDB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				0908A85E1FEBAE9D0053C4ED /* MainViewController.swift */,
 				0908A8601FEBAFFC0053C4ED /* Note.swift */,
 				0908A8621FEBB1CA0053C4ED /* EditNoteController.swift */,
+				0951874D1FF7C3E600C29563 /* SQLiteDB.swift */,
 			);
 			path = IF26_NotePad;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			files = (
 				0908A85F1FEBAE9D0053C4ED /* MainViewController.swift in Sources */,
 				0908A8311FEBAD720053C4ED /* AppDelegate.swift in Sources */,
+				0951874E1FF7C3E600C29563 /* SQLiteDB.swift in Sources */,
 				0908A8611FEBAFFC0053C4ED /* Note.swift in Sources */,
 				0908A8631FEBB1CA0053C4ED /* EditNoteController.swift in Sources */,
 			);
