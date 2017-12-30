@@ -22,6 +22,10 @@ class EditNoteController: UIViewController{
         
         // permet de mettre a jour la vue avec la note
         updateNote()
+        
+        if(tvContenu.isFocused){
+            print("focus")
+        }
     }
     
     // Creation des boutons et des actions dans la barre du menu
