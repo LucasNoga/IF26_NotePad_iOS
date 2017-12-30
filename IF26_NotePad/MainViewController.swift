@@ -1,16 +1,21 @@
 import UIKit
 
 class MainViewController: UITableViewController {
-    
-    var mNotes: [Note] = []
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var mNotes = [Note]()
     var editNoteController: EditNoteController!
+    
+    //let database: Database = Database()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mNotes = appDelegate.loadNotes()
         //creationTableau()
         
         setNavigationButton()
-        print("taille du tableau \(mNotes.count)")
+        
+        //print("taille du tableau \(mNotes.count)")
         //Si on a modifié des notes
         //print("didLoad")
         
@@ -49,11 +54,10 @@ class MainViewController: UITableViewController {
     
     //Pour editer une note existante
     func editerNote(segue: UIStoryboardSegue, indexPath: IndexPath){
-        //let note = self.mNotes[indexPath.row] //on recupere la note
         let nav = segue.destination as! UINavigationController
         editNoteController = nav.topViewController as! EditNoteController
-        editNoteController.note = self.mNotes[indexPath.row]
-        editNoteController.posNote = indexPath.row
+        editNoteController.note = self.mNotes[indexPath.row] // on recupere la note
+        editNoteController.posNote = indexPath.row //on recupere la ligne de la note
         editNoteController.mainController = self
         print(editNoteController.note.titre)
     }
@@ -106,12 +110,16 @@ class MainViewController: UITableViewController {
     //Permet de recharger la vue
     override func viewDidAppear(_ animated: Bool) {
         //print("viewDidAppear")
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
     
-    //Permet de recharger la vue
     override func viewWillAppear(_ animated: Bool) {
-        //print("viewWillAppear")
+        self.tableView.reloadData()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        print("disparu")
+        appDelegate.saveNotes(notes: mNotes)
+        //Il faut sauvegarder le tableau ailleurs
+    }
 }
