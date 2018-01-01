@@ -5,19 +5,14 @@ class MainViewController: UITableViewController {
     var mNotes = [Note]()
     var editNoteController: EditNoteController!
     
-    //let database: Database = Database()
+    //let database: Database = Database()////////////////POUR LA BD ////////////////////////////////////////////////////////////////////////
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mNotes = appDelegate.loadNotes()
-        //creationTableau()
+        mNotes = appDelegate.loadNotes() //chargement des notes de l'appli
         
-        setNavigationButton()
-        
-        //print("taille du tableau \(mNotes.count)")
-        //Si on a modifié des notes
-        //print("didLoad")
+        setNavigationButton()// mis en place des boutons d'ajout et d'edition
         
         self.tableView.delegate = self
         tableView.reloadData()
@@ -29,10 +24,11 @@ class MainViewController: UITableViewController {
         let addNote = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ajoutNote))
         self.navigationItem.setRightBarButton(addNote, animated: true)
     }
-
-    func creationTableau(){
-        mNotes = [Note.init(titre: "salut", contenu: "monContenu"), Note.init(titre: "salut2", contenu: "monContenu"),
-                  Note.init(titre: "salut3", contenu: "monContenu"), Note.init(titre: "salut4", contenu: "monContenu")]
+    
+    // Action lorsque l'on clique sur +
+    @objc func ajoutNote(_ sender: AnyObject) {
+        mNotes.append(Note(titre: "Titre de la note" , contenu:"Contenu de la note"))
+        tableView.reloadData()
     }
     
     //Segue et traite les notes existantes des nouvelles notes
@@ -46,17 +42,11 @@ class MainViewController: UITableViewController {
         }
     }
     
-    // Action lorsque l'on clique sur +
-    @objc func ajoutNote(_ sender: AnyObject) {
-        mNotes.append(Note(titre: "nouvelle note" , contenu:"nouveau contenu"))
-        tableView.reloadData()
-    }
-    
     //Pour editer une note existante
     func editerNote(segue: UIStoryboardSegue, indexPath: IndexPath){
         let nav = segue.destination as! UINavigationController
         editNoteController = nav.topViewController as! EditNoteController
-        editNoteController.note = self.mNotes[indexPath.row] // on recupere la note
+        editNoteController.note = self.mNotes[indexPath.row] // on recupere la note selectionné
         editNoteController.posNote = indexPath.row //on recupere la ligne de la note
         editNoteController.mainController = self
         print(editNoteController.note.titre)
@@ -91,16 +81,12 @@ class MainViewController: UITableViewController {
         return true
     }
 
+    //Fonction appeler lors du bouton edit
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
         //Supprime la note selectionner voulue
         if editingStyle == .delete {
             supprimerNote(index: indexPath.row)
-        
-        // Ajoute une nouvelle note
-        } else if editingStyle == .insert {
-            print("insertion d'une note")
-        }    
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -109,17 +95,11 @@ class MainViewController: UITableViewController {
     
     //Permet de recharger la vue
     override func viewDidAppear(_ animated: Bool) {
-        //print("viewDidAppear")
-        self.tableView.reloadData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         print("disparu")
-        appDelegate.saveNotes(notes: mNotes)
-        //Il faut sauvegarder le tableau ailleurs
+        appDelegate.saveNotes(notes: mNotes) //sauvegarde des notes dans l'appli
     }
 }
