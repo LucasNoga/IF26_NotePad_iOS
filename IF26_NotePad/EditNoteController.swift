@@ -20,15 +20,16 @@ class EditNoteController: UIViewController{
         
         editerVue()
         
-        // permet de mettre a jour la vue avec la note
-        updateNote()
+        afficherNote() // permet de mettre a jour la vue avec la note
 
     }
     
     // Creation des boutons et des actions dans la barre du menu
     func setNavigationButton(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(sauvegardeNote))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel ,  target: self, action: #selector(cancelNote))
+        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "sauvegarder", style: UIBarButtonItemStyle.plain, target: self, action: #selector(sauvegardeNote)), animated: true)
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(title: "Annuler", style: UIBarButtonItemStyle.plain, target: self, action: #selector(cancelNote)), animated: true)
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
+        self.navigationItem.LeftBarButtonItem?.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
     }
     
     // Permet de pouvoir editer les notes
@@ -46,18 +47,12 @@ class EditNoteController: UIViewController{
                 mainController = segue.destination as! MainViewController
                 mainController.mNotes.append(note)
                 print(mainController.mNotes.count)
-                //mainController.tableView.reloadData()
-                //Envoyer la note
-            }
-            else if cancel{
-                print("cancel note")
-                //annulerNote()
             }
         }
     }
     
     /** Affiche le titre et le contenu de la sélectionné */
-    func updateNote() {
+    func afficherNote() {
         self.tfTitre.insertText(note.titre)
         self.tvContenu.insertText(note.contenu)
     }
