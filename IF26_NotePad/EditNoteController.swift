@@ -29,7 +29,7 @@ class EditNoteController: UIViewController{
         self.navigationItem.setRightBarButton(UIBarButtonItem(title: "sauvegarder", style: UIBarButtonItemStyle.plain, target: self, action: #selector(sauvegardeNote)), animated: true)
         self.navigationItem.setLeftBarButton(UIBarButtonItem(title: "Annuler", style: UIBarButtonItemStyle.plain, target: self, action: #selector(cancelNote)), animated: true)
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
-        self.navigationItem.LeftBarButtonItem?.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
     }
     
     // Permet de pouvoir editer les notes
