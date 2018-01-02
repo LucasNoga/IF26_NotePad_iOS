@@ -20,8 +20,11 @@ class MainViewController: UITableViewController {
     
     // Creation des boutons et des actions dans la barre du menu
     func setNavigationButton(){
+        self.editButtonItem.title = "Edition"
+        self.editButtonItem.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         self.navigationItem.leftBarButtonItem = self.editButtonItem //bouton edition et suppression pour une tableView
         let addNote = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ajoutNote))
+        addNote.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         self.navigationItem.setRightBarButton(addNote, animated: true)
     }
     
@@ -87,10 +90,6 @@ class MainViewController: UITableViewController {
         if editingStyle == .delete {
             supprimerNote(index: indexPath.row)
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     //Permet de recharger la vue
