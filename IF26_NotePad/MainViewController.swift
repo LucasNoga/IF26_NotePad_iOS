@@ -1,19 +1,15 @@
 import UIKit
+import SQLite
 
 class MainViewController: UITableViewController {
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var mNotes = [Note]()
     var editNoteController: EditNoteController!
-    
-    //let database: Database = Database()////////////////POUR LA BD ////////////////////////////////////////////////////////////////////////
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         mNotes = appDelegate.loadNotes() //chargement des notes de l'appli
-        
         setNavigationButton()// mis en place des boutons d'ajout et d'edition
-        
         self.tableView.delegate = self
         tableView.reloadData()
     }

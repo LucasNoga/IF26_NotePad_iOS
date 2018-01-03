@@ -15,18 +15,14 @@ class EditNoteController: UIViewController{
     /*Methode lors de la creation de la scene*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setNavigationButton()
-        
         editerVue()
-        
         afficherNote() // permet de mettre a jour la vue avec la note
-
     }
     
     // Creation des boutons et des actions dans la barre du menu
     func setNavigationButton(){
-        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "sauvegarder", style: UIBarButtonItemStyle.plain, target: self, action: #selector(sauvegardeNote)), animated: true)
+        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "Sauvegarder", style: UIBarButtonItemStyle.plain, target: self, action: #selector(sauvegardeNote)), animated: true)
         self.navigationItem.setLeftBarButton(UIBarButtonItem(title: "Annuler", style: UIBarButtonItemStyle.plain, target: self, action: #selector(cancelNote)), animated: true)
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
@@ -43,10 +39,7 @@ class EditNoteController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "retourNote" { //permet de revenir au main
             if save{
-                print("save note")
                 mainController = segue.destination as! MainViewController
-                mainController.mNotes.append(note)
-                print(mainController.mNotes.count)
             }
         }
     }
